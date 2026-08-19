@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christian Laurent Mendoza — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0D1B2A;
+    --blue: #1F4E79;
+    --accent: #2E75B6;
+    --sky: #5BA4D4;
+    --pale: #EBF3FB;
+    --gold: #C9A84C;
+    --white: #FAFBFC;
+    --mid: #6B7A8D;
+    --dark: #1A2332;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--white);
+    color: var(--dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAVIGATION */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 60px;
+    background: rgba(13,27,42,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--white);
+    letter-spacing: 0.5px;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--sky); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--navy) 0%, #162942 50%, #0a2240 100%);
+    display: flex; align-items: center;
+    padding: 100px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse 800px 600px at 80% 50%, rgba(46,117,182,0.15) 0%, transparent 70%),
+      radial-gradient(circle 300px at 20% 80%, rgba(201,168,76,0.08) 0%, transparent 60%);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 80px;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+  .hero-eyebrow {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--gold);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--sky);
+  }
+  .hero-subtitle {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 36px;
+    font-weight: 300;
+    max-width: 480px;
+    line-height: 1.8;
+  }
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-bottom: 48px;
+  }
+  .tag {
+    padding: 6px 16px;
+    border: 1px solid rgba(91,164,212,0.35);
+    border-radius: 100px;
+    font-size: 0.78rem;
+    color: var(--sky);
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+  .hero-cta {
+    display: flex; gap: 16px; align-items: center;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: 14px 32px;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    border-radius: 4px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--sky); transform: translateY(-1px); }
+  .btn-ghost {
+    display: inline-block;
+    padding: 14px 32px;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--sky); color: var(--sky); }
+
+  .hero-photo-wrap { position: relative; }
+  .hero-photo-frame {
+    width: 300px;
+    height: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 3px solid rgba(46,117,182,0.4);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+    margin: 0 auto;
+    background: var(--navy);
+  }
+  .hero-photo-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  /* STATS STRIP */
+  .stats-strip {
+    background: var(--blue);
+    padding: 48px 60px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat-item {
+    text-align: center;
+    padding: 0 24px;
+    border-right: 1px solid rgba(255,255,255,0.15);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-number span { color: var(--gold); font-size: 1.4rem; }
+  .stat-label {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  /* SECTIONS */
+  section { padding: 100px 60px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 1px;
+    background: var(--accent);
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: var(--navy);
+    margin-bottom: 60px;
+    line-height: 1.2;
+  }
+
+  /* EXPERIENCE TIMELINE */
+  #experience { background: var(--white); }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 22px; top: 8px; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+  .timeline-item {
+    padding-left: 70px;
+    padding-bottom: 60px;
+    position: relative;
+  }
+  .timeline-dot {
+    position: absolute;
+    left: 10px; top: 6px;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 2px var(--accent);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .timeline-dot.gold { background: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+  .timeline-dot-inner {
+    width: 8px; height: 8px; border-radius: 50%; background: white;
+  }
+  .timeline-date {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .timeline-role {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .timeline-org {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--blue);
+    margin-bottom: 16px;
+  }
+  .timeline-bullets {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .timeline-bullets li {
+    font-size: 0.9rem;
+    color: var(--mid);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.7;
+  }
+  .timeline-bullets li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--sky);
+    font-size: 0.7rem;
+    top: 3px;
+  }
+  .timeline-bullets strong { color: var(--dark); font-weight: 600; }
+
+  /* SKILLS GRID */
+  #skills { background: #F4F7FB; }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .skill-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 32px 28px;
+    border: 1px solid rgba(31,78,121,0.08);
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--accent), var(--sky));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+  .skill-card:hover::before { transform: scaleX(1); }
+  .skill-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(31,78,121,0.1); }
+  .skill-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .skill-desc {
+    font-size: 0.82rem;
+    color: var(--mid);
+    line-height: 1.7;
+  }
+
+  /* EDUCATION & CERTS */
+  #education { background: var(--white); }
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+  .edu-card {
+    border-left: 3px solid var(--accent);
+    padding-left: 24px;
+    margin-bottom: 24px;
+  }
+  .edu-year {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .edu-degree {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .edu-school {
+    font-size: 0.85rem;
+    color: var(--mid);
+  }
+
+  .certs-list {
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .cert-item {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 14px;
+    padding: 16px 20px;
+    background: var(--pale);
+    border-radius: 8px;
+  }
+  .cert-info { display: flex; flex-direction: column; }
+  .cert-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .cert-provider {
+    font-size: 0.80rem;
+    color: var(--blue);
+  }
+  .cert-meta {
+    text-align: right;
+    font-size: 0.76rem;
+    color: var(--mid);
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--navy);
+    text-align: center;
+  }
+  #contact .section-title { color: var(--white); }
+  #contact .section-label { color: var(--sky); justify-content: center; }
+  #contact .section-label::before { background: var(--sky); }
+  .contact-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.55);
+    margin-top: -40px;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+  .contact-links {
+    display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+  }
+  .contact-chip {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 24px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .contact-chip:hover {
+    border-color: var(--sky);
+    color: var(--sky);
+    background: rgba(91,164,212,0.06);
+  }
+
+  /* FOOTER */
+  footer {
+    background: #070D14;
+    text-align: center;
+    padding: 24px;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.25);
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero-photo-wrap { order: -1; }
+    .hero-photo-frame { width: 200px; height: 200px; }
+    .stats-strip { grid-template-columns: repeat(2,1fr); padding: 40px 24px; }
+    .stat-item { border-right: none; padding: 12px 0; }
+    section { padding: 60px 24px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-logo">C<span>.</span>L<span>.</span> Mendoza</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Professional Portfolio</p>
+      <h1>Christian Laurent<br><em>Mendoza</em></h1>
+      <p class="hero-subtitle">
+        Logistics &amp; Administrative Professional with over 6 years of progressive experience in customs operations, supply chain coordination, and regulatory compliance. <strong style="color:rgba(255,255,255,0.85)">MBA Candidate</strong> building strategic leadership for the modern enterprise.
+      </p>
+      <div class="hero-tags">
+        <span class="tag">Customs Clearance</span>
+        <span class="tag">Supply Chain</span>
+        <span class="tag">SAP Proficient</span>
+        <span class="tag">Tax Audit</span>
+        <span class="tag">MBA Candidate</span>
+        <span class="tag">Revenue Integrity</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#experience" class="btn-primary">View Experience</a>
+        <a href="#contact" class="btn-ghost">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-frame">
+        <img src="profile.jpg" alt="Christian Laurent Mendoza">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-number">6<span>+</span></div>
+    <div class="stat-label">Years Experience</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">100<span>%</span></div>
+    <div class="stat-label">Compliance Record</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">SAP</div>
+    <div class="stat-label">MM &amp; Logistics</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">MBA</div>
+    <div class="stat-label">Candidate (2026)</div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label">Career History</p>
+    <h2 class="section-title">Professional Experience</h2>
+    
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot gold"><div class="timeline-dot-inner"></div></div>
+        <div class="timeline-date">2024 — Present</div>
+        <div class="timeline-role">Administrative Assistant II / Acting Logistics Management Officer I</div>
+        <div class="timeline-org">Duty-Free Philippines</div>
+        <ul class="timeline-bullets">
+          <li>Manage inventory control and supply chain logistics operations using SAP systems.</li>
+          <li>Coordinate import customs clearances and maintain full regulatory compliance.</li>
+          <li>Optimize working capital and store merchandise management workflows.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+        <div class="timeline-date">2019 — 2024</div>
+        <div class="timeline-role">Customs &amp; Technical Audit Officer</div>
+        <div class="timeline-org">Bureau of Customs (BOC)</div>
+        <ul class="timeline-bullets">
+          <li>Executed post-clearance tax audits and technical reviews to safeguard revenue integrity.</li>
+          <li>Evaluated import/export documentation against tariff classifications and valuation guidelines.</li>
+          <li>Collaborated across government units to uphold national customs enforcement standards.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label">Capabilities</p>
+    <h2 class="section-title">Core Competencies</h2>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-title">Customs &amp; Trade Compliance</div>
+        <div class="skill-desc">Deep knowledge of tariff classification, import/export valuation, and regulatory clearance procedures.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Supply Chain &amp; Logistics</div>
+        <div class="skill-desc">End-to-end inventory management, merchandise tracking, and warehouse operations optimization.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">SAP &amp; ERP Proficiency</div>
+        <div class="skill-desc">Hands-on experience in SAP Materials Management (MM) and SAP Business Network Supply Chain Collaboration.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Tax &amp; Technical Audit</div>
+        <div class="skill-desc">Revenue integrity protection, post-clearance audit analysis, and administrative record compliance.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Financial &amp; Accounting Essentials</div>
+        <div class="skill-desc">Working capital analysis, inventory valuation, and non-accountant financial accounting principles.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Strategic Leadership</div>
+        <div class="skill-desc">MBA-level operational strategy, cross-functional administration, and client relations management.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION & CERTS -->
+<section id="education">
+  <div class="section-inner">
+    <p class="section-label">Qualifications</p>
+    <h2 class="section-title">Education &amp; Certifications</h2>
+
+    <div class="edu-grid">
+      <div>
+        <div class="edu-card">
+          <div class="edu-year">2026 Expected</div>
+          <div class="edu-degree">Master of Business Administration (MBA)</div>
+          <div class="edu-school">Candidate</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-year">2019</div>
+          <div class="edu-degree">BS in Customs Administration</div>
+          <div class="edu-school">Graduate</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="certs-list">
+          <div class="cert-item">
+            <div class="cert-info">
+              <span class="cert-name">Accounting for Non-Accountants</span>
+              <span class="cert-provider">ESME Philippines</span>
+            </div>
+            <div class="cert-meta">
+              <div>2026</div>
+              <small>Technical</small>
+            </div>
+          </div>
+
+          <div class="cert-item">
+            <div class="cert-info">
+              <span class="cert-name">SAP Material Management &amp; Logistics</span>
+              <span class="cert-provider">Alison</span>
+            </div>
+            <div class="cert-meta">
+              <div>2026</div>
+              <small>Technical</small>
+            </div>
+          </div>
+
+          <div class="cert-item">
+            <div class="cert-info">
+              <span class="cert-name">Supply Chain Management and Analytics</span>
+              <span class="cert-provider">Coursera</span>
+            </div>
+            <div class="cert-meta">
+              <div>2026</div>
+              <small>Technical</small>
+            </div>
+          </div>
+
+          <div class="cert-item">
+            <div class="cert-info">
+              <span class="cert-name">SAP Business Network Supply Chain Collaboration</span>
+              <span class="cert-provider">SAP Learning</span>
+            </div>
+            <div class="cert-meta">
+              <div>2026</div>
+              <small>Technical</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label">Connect</p>
+    <h2 class="section-title">Get In Touch</h2>
+    <p class="contact-sub">Open for strategic logistics, supply chain, and trade compliance roles.</p>
+    <div class="contact-links">
+      <a href="mailto:contact@christianmendoza.com" class="contact-chip">Email Me</a>
+      <a href="#experience" class="contact-chip">LinkedIn Profile</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 Christian Laurent Mendoza. All rights reserved.
+</footer>
+
+</body>
+</html>
